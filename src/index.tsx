@@ -8,8 +8,9 @@ import GlobalStyle from './GlobalStyle'
 const theme = {
   primary: 'black',
   secondary: 'white',
-  secondaryDark: '#0077c2',
-  acmBlue: '#0077c2'
+  secondaryDark: '#686b78',
+  accent: '#fc8019',
+  success: 'rgb(72, 196, 121)'
 }
 
 ReactDOM.render(

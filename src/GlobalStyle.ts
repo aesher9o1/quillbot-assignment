@@ -8,4 +8,9 @@ export default createGlobalStyle`
     font-family: Raleway, sans-serif;
     transition: all 0.5s ease;
   }
+
+  .flex-grow {
+    flex: 1 0 auto;
+}
+
 `
