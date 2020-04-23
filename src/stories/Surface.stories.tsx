@@ -19,10 +19,9 @@ const sampleCardProps = {
 export const SimpleCard = () => {
   return (
     <RowGrid min={'220px'} max={'1fr'}>
-      <FoodCard {...sampleCardProps} />
-      <FoodCard {...sampleCardProps} />
-      <FoodCard {...sampleCardProps} />
-      <FoodCard {...sampleCardProps} />
+      <FoodCard {...sampleCardProps} className="col-sm-4" />
+      <FoodCard {...sampleCardProps} className="col-sm-4" />
+      <FoodCard {...sampleCardProps} className="col-sm-4" />
     </RowGrid>
   )
 }

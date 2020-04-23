@@ -1,6 +1,5 @@
 import React from 'react'
 import FoodCard from '../components/Surface/FoodCard'
-import Grid from '@material-ui/core/Grid'
 
 export default {
   title: 'Card',
@@ -18,10 +17,10 @@ const sampleCardProps = {
 
 export const SimpleCard = () => {
   return (
-    <Grid container>
-      <Grid item xs={3}>
-        <FoodCard {...sampleCardProps} />
-      </Grid>
-    </Grid>
+    <div className="row">
+      <FoodCard {...sampleCardProps} className="col-sm-4" />
+      <FoodCard {...sampleCardProps} className="col-sm-4" />
+      <FoodCard {...sampleCardProps} className="col-sm-4" />
+    </div>
   )
 }

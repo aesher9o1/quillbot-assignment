@@ -10,15 +10,15 @@ interface PROPTYPES {
   isExlusive: boolean
   delivery_time: string
   price_for_two: number
+  className: string
 }
 
 const FoodWrapper = styled.div`
-  display: flex;
   flex-direction: column;
-  padding: 20px 20px 57px;
   border: 1px solid #fff;
   width: 100%;
-  background: black;
+  padding: 20px 20px 57px;
+  box-shadow: none;
   &:hover {
     border-color: #d3d5df;
     box-shadow: 0 4px 7px 0 rgba(218, 220, 230, 0.6);
@@ -33,23 +33,9 @@ const FoodImage = styled.div`
   background-size: cover;
 `
 
-// const FoodCard = styled.div<{
-//   name: string
-//   food_types: string[]
-//   ratings: string
-//   isExlusive: boolean
-//   delivery_time: string
-//   price_for_two: number
-// }>`
-//   font-family: 'Raleway', sans-serif;
-//   font-weight: 900;
-//   padding: 20px 20px 57px;
-//   border: 1px solid #fff;
-// `
-
 function FoodCard(props: PROPTYPES) {
   return (
-    <FoodWrapper>
+    <FoodWrapper className={props.className}>
       <FoodImage />
       <Paragraph>{props.name}</Paragraph>
       <div>Aashis</div>

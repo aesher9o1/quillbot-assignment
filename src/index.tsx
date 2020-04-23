@@ -16,7 +16,9 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <GlobalStyle />
     <React.StrictMode>
-      <App />
+      <div className="container-fluid">
+        <App />
+      </div>
     </React.StrictMode>
   </ThemeProvider>,
   document.getElementById('root')

@@ -1,7 +1,5 @@
 import React from 'react'
 import FoodCard from './components/Surface/FoodCard'
-import RowGrid from './components/Layout/RowGrid'
-import Grid from '@material-ui/core/Grid'
 
 const sampleCardProps = {
   name: 'Maestro A Restro Cafe',
@@ -14,31 +12,16 @@ const sampleCardProps = {
 
 function App() {
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={3}>
-        asdas
-      </Grid>
-      <Grid item xs>
-        <Grid container spacing={3}>
-          <Grid item sm={4}>
-            <FoodCard {...sampleCardProps} />
-          </Grid>
-          <Grid item sm={4}>
-            <FoodCard {...sampleCardProps} />
-          </Grid>
-          <Grid item sm={4}>
-            <FoodCard {...sampleCardProps} />
-          </Grid>
-        </Grid>
-        {/* <RowGrid min={'220px'} max={'1fr'}>
-          <FoodCard {...sampleCardProps} />
-          <FoodCard {...sampleCardProps} />
-          <FoodCard {...sampleCardProps} />
-          <FoodCard {...sampleCardProps} />
-        </RowGrid> */}
-      </Grid>
-    </Grid>
+    <div className="row">
+      <div className="col-2">asdas</div>
+      <div className="col-10">
+        <div className="row">
+          <FoodCard {...sampleCardProps} className="col-sm-4" />
+          <FoodCard {...sampleCardProps} className="col-sm-4" />
+          <FoodCard {...sampleCardProps} className="col-sm-4" />
+        </div>
+      </div>
+    </div>
   )
 }
-
 export default App
