@@ -21,7 +21,7 @@ const FoodWrapper = styled.div`
   width: 100%;
   padding: 20px 20px 10px 20px;
   box-shadow: none;
-
+  transition: all 0.25s ease;
   .view {
     visibility: hidden;
   }

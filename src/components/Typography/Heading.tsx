@@ -1,13 +1,12 @@
 import styled from 'styled-components'
-import { DEVICES } from '../Breakpoints'
 
 interface PROPTYPES {
   varients: number
-  mediaQueryType?: DEVICES
+  color?: string
   theme: any
 }
 
-const getFontSizeBasedOnVarient = (varients: number, mediaQueryType?: DEVICES) => {
+const getFontSizeBasedOnVarient = (varients: number) => {
   switch (varients) {
     case 1:
       return '5rem'
@@ -23,10 +22,12 @@ const getFontSizeBasedOnVarient = (varients: number, mediaQueryType?: DEVICES) =
 }
 
 const Heading = styled.h1<{ varients: number }>`
-  color: ${(props: PROPTYPES) => props.theme.primary};
-  font-size: ${(props: PROPTYPES) => getFontSizeBasedOnVarient(props.varients, props.mediaQueryType)};
+  color: ${(props: PROPTYPES) => props.color || props.theme.primary};
+  font-size: ${(props: PROPTYPES) => getFontSizeBasedOnVarient(props.varients)};
   font-family: 'Raleway', sans-serif;
   font-weight: 900;
+  margin: 0 !important;
+  padding: 0 !important;
 `
 
 export default Heading

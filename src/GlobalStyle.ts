@@ -6,7 +6,6 @@ export default createGlobalStyle`
     margin: 0;
     overflow-x:hidden!important;
     font-family: Raleway, sans-serif;
-    transition: all 0.5s ease;
   }
 
   .flex-grow {

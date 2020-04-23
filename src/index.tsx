@@ -10,14 +10,15 @@ const theme = {
   secondary: 'white',
   secondaryDark: '#686b78',
   accent: '#fc8019',
-  success: 'rgb(72, 196, 121)'
+  success: 'rgb(72, 196, 121)',
+  shadowOrange: 'rgba(251, 126, 24, 0.65)'
 }
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <GlobalStyle />
     <React.StrictMode>
-      <div className="container-fluid">
+      <div className="container">
         <App />
       </div>
     </React.StrictMode>
