@@ -1,5 +1,9 @@
 import { Restaurants } from '../types/store'
 import * as actions from '../types/actions'
+import { Dispatch } from 'redux'
+import axios from 'axios'
+import APIS from '../utils/ApiStore'
+import { ThunkAction } from 'redux-thunk'
 
 export const setupPopularBrands = (popularBrands: Restaurants[]): actions.SetupPopularBrandsAction => {
   return {
@@ -33,5 +37,35 @@ export const setupGourment = (gourment: Restaurants[]): actions.SetupGourmentAct
   return {
     type: actions.SETUP_GOURMENT,
     payload: gourment
+  }
+}
+
+export const fetchPopularBrands = (): ThunkAction<void, any, null, actions.SetupPopularBrandsAction> => {
+  return (dispatch: Dispatch) => {
+    axios.get(APIS.GET_POPULAR_BRANDS).then((res) => dispatch(setupPopularBrands(res.data)))
+  }
+}
+
+export const fetchOffersNearYou = (): ThunkAction<void, any, null, actions.SetupOffersNearYouAction> => {
+  return (dispatch: Dispatch) => {
+    axios.get(APIS.GET_OFFERS_NEAR_YOU).then((res) => dispatch(setupOffersNearYou(res.data)))
+  }
+}
+
+export const fetchSwiggyExclusive = (): ThunkAction<void, any, null, actions.SetupSwiggyExclusiveAction> => {
+  return (dispatch: Dispatch) => {
+    axios.get(APIS.GET_SWIGGY_EXCLUSIVE).then((res) => dispatch(setupSwiggyExclusive(res.data)))
+  }
+}
+
+export const fetchExpressDelivery = (): ThunkAction<void, any, null, actions.SetupExpressDeliveryAction> => {
+  return (dispatch: Dispatch) => {
+    axios.get(APIS.GET_EXPRESS_DELIVERY).then((res) => dispatch(setupExpressDelivery(res.data)))
+  }
+}
+
+export const fetchGourment = (): ThunkAction<void, any, null, actions.SetupGourmentAction> => {
+  return (dispatch: Dispatch) => {
+    axios.get(APIS.GET_GOURMET).then((res) => dispatch(setupGourment(res.data)))
   }
 }

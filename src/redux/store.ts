@@ -1,9 +1,20 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import reducer from './reducer'
+import thunkMiddleware from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-export const rootReducer = combineReducers({
-  reducer
+const rootReducer = combineReducers({
+  storeReducer: reducer
 })
 
-export const store = createStore(rootReducer)
+const configureStore = () => {
+  const middlewares = applyMiddleware(thunkMiddleware)
+  const enhancers = composeWithDevTools(middlewares)
+
+  const store = createStore(rootReducer, enhancers)
+
+  return store
+}
+
 export type AppState = ReturnType<typeof rootReducer>
+export default configureStore
