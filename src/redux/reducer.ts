@@ -8,12 +8,18 @@ import {
   SETUP_GOURMENT
 } from '../types/actions'
 
+const initialRestaurantData = {
+  sectionName: 'Loading',
+  renderedOnScreen: 0,
+  restaurants: []
+}
+
 const initialState: InitialState = {
-  popularBrands: [],
-  offersNearYou: [],
-  swiggyExclusive: [],
-  expressDelivery: [],
-  gourmet: []
+  popularBrands: initialRestaurantData,
+  offersNearYou: initialRestaurantData,
+  swiggyExclusive: initialRestaurantData,
+  expressDelivery: initialRestaurantData,
+  gourmet: initialRestaurantData
 }
 
 function reducer(state = initialState, action: ActionTypes): InitialState {

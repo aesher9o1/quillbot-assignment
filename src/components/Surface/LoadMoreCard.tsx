@@ -2,9 +2,8 @@ import React from 'react'
 import styled, { withTheme } from 'styled-components'
 import Heading from '../Typography/Heading'
 
-interface PROPTYPES {
+interface PROPTYPES extends React.HTMLAttributes<HTMLElement> {
   items: number
-  className: string
   theme: any
 }
 

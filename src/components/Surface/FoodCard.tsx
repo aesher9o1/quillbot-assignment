@@ -3,16 +3,17 @@ import styled from 'styled-components'
 import Paragraph from '../Typography/Paragraph'
 import SmallText from '../Typography/SmallText'
 import ClearButton from '../Button/ClearButton'
-import Images from '../../utils/images.json'
-interface PROPTYPES {
+interface PROPTYPES extends React.HTMLAttributes<HTMLElement> {
   name: string
   food_types: string[]
   ratings: string
   isExlusive: boolean
   delivery_time: string
   price_for_two: number
-  className: string
+  imageURL: string
 }
+
+console.log(Math.floor(Math.random() * 10))
 
 const FoodWrapper = styled.div`
   flex-direction: column;
@@ -33,10 +34,10 @@ const FoodWrapper = styled.div`
     }
   }
 `
-const FoodImage = styled.div`
+const FoodImage = styled.div<{ imageURL: string }>`
   height: 160px;
   width: '100%';
-  background: url(${Images[Math.floor(Math.random() * 10)]});
+  background: url(${(props) => props.imageURL});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -44,7 +45,7 @@ const FoodImage = styled.div`
 
 const Rating = styled.div`
   background-color: ${(props) => props.theme.success};
-  width: 43px;
+  width: 45px;
   padding: 0 5px;
   display: flex;
   align-items: center;
@@ -56,7 +57,7 @@ function FoodCard(props: PROPTYPES) {
   return (
     <div className={props.className}>
       <FoodWrapper>
-        <FoodImage />
+        <FoodImage imageURL={props.imageURL} />
         <Paragraph>{props.name}</Paragraph>
         <SmallText>{props.food_types.join(', ')}</SmallText>
         <div className="d-flex flex-row mt-4">

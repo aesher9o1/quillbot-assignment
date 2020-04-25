@@ -3,11 +3,10 @@ import styled, { withTheme } from 'styled-components'
 import Heading from '../Typography/Heading'
 import SmallText from '../Typography/SmallText'
 
-interface PROPTYPES {
+interface PROPTYPES extends React.HTMLAttributes<HTMLElement> {
   heading: string
   subheading: string
   isActive?: boolean
-  className?: string
   theme: any
 }
 
@@ -30,7 +29,7 @@ const Wrapper = styled.div<{ isActive?: boolean }>`
 
 function SidebarButton(props: PROPTYPES) {
   return (
-    <Wrapper isActive={props.isActive}>
+    <Wrapper isActive={props.isActive} onClick={props.onClick}>
       <Heading varients={5} className={'heading'}>
         {props.heading}
       </Heading>

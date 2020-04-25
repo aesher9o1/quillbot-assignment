@@ -8,27 +8,27 @@ export const SETUP_GOURMENT = 'SETUP_GOURMET'
 
 export interface SetupPopularBrandsAction {
   type: typeof SETUP_POPULAR_BRANDS
-  payload: Restaurants[]
+  payload: Restaurants
 }
 
 export interface SetupOffersNearYouAction {
   type: typeof SETUP_OFFERS_NEAR_YOU
-  payload: Restaurants[]
+  payload: Restaurants
 }
 
 export interface SetupSwiggyExclusiveAction {
   type: typeof SETUP_SWIGGY_EXCLUSIVE
-  payload: Restaurants[]
+  payload: Restaurants
 }
 
 export interface SetupExpressDeliveryAction {
   type: typeof SETUP_EXPRESS_DELIVERY
-  payload: Restaurants[]
+  payload: Restaurants
 }
 
 export interface SetupGourmentAction {
   type: typeof SETUP_GOURMENT
-  payload: Restaurants[]
+  payload: Restaurants
 }
 
 export type ActionTypes =

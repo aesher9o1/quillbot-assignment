@@ -1,34 +1,67 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import FoodCard from './components/Surface/FoodCard'
 import LoadMoreCard from './components/Surface/LoadMoreCard'
-import SidebarButton from './components/Button/SidebarButton'
+import Sidebar from './fragments/Sidebar'
+import { useSelector } from 'react-redux'
+import { RootState } from './types/store'
+import Heading from './components/Typography/Heading'
+import Image from './utils/images.json'
+import { displayStates } from './utils/Common'
 
-const sampleCardProps = {
-  name: 'Maestro A Restro Cafe',
-  food_types: ['North Indian', 'Chinese', 'Beverages'],
-  ratings: '4.2',
-  isExlusive: false,
-  delivery_time: '47 mins',
-  price_for_two: 1200
-}
-
-const boxShadow = {
-  boxShadow: '0 4px 7px 0 rgba(218, 220, 230, 0.6)',
-  padding: 0
-}
+const cardClass = 'col-sm-4 mb-4'
 
 function App() {
+  const [cardState, setCardState] = useState(displayStates.DEFAULT)
+  const [cards, setCards] = useState([])
+  const golbalStoreState = useSelector((state: RootState) => state.storeReducer)
+
+  const renderSectionHeader = (sectionName: string) => {
+    return cardState === displayStates.DEFAULT ? (
+      <div className="row mb-2 ml-3">
+        <Heading varients={5}>{sectionName}</Heading>
+      </div>
+    ) : (
+      <div></div>
+    )
+  }
+
+  const renderSectionCards = (restaurants: any, renderedOnScreen: number) => {
+    const cards = []
+    for (let i = 0; i < renderedOnScreen; i++)
+      cards.push(
+        <FoodCard {...restaurants[i]} className={cardClass} key={i} imageURL={Image[Math.floor(Math.random() * 10)]} />
+      )
+
+    return cards
+  }
+
+  useEffect(() => {
+    const cardSection: any = []
+
+    Object.entries(golbalStoreState).forEach(([key, value]) => {
+      if (value.sectionName !== 'Loading') {
+        cardSection.push(
+          <div className="container mb-4 border-bottom" key={value.sectionName}>
+            <div className="row pl-3"> {renderSectionHeader(value.sectionName)}</div>
+            <div className="row">
+              {renderSectionCards(value.restaurants, value.renderedOnScreen)}
+              <LoadMoreCard className={cardClass} items={value.restaurants.length - value.renderedOnScreen} />
+            </div>
+          </div>
+        )
+      }
+    })
+
+    setCards(cardSection)
+  }, [golbalStoreState, cardState])
+
   return (
     <div className="row mt-4">
-      <div className="col-2" style={boxShadow}>
-        <SidebarButton heading={'easter'} subheading={'this is easter'} />
+      <div className="col-2">
+        <Sidebar setCardStates={setCardState} cardState={cardState} />
       </div>
       <div className="col-10">
-        <div className="row">
-          <FoodCard {...sampleCardProps} className="col-sm-4" />
-          <FoodCard {...sampleCardProps} className="col-sm-4" />
-          <LoadMoreCard className="col-sm-4" items={4} />
-        </div>
+        <div className="row pr-5">{cards}</div>
       </div>
     </div>
   )

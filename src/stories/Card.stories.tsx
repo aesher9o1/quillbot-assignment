@@ -1,5 +1,6 @@
 import React from 'react'
 import FoodCard from '../components/Surface/FoodCard'
+import Images from '../utils/images.json'
 
 export default {
   title: 'Card',
@@ -18,9 +19,9 @@ const sampleCardProps = {
 export const SimpleCard = () => {
   return (
     <div className="row">
-      <FoodCard {...sampleCardProps} className="col-sm-4" />
-      <FoodCard {...sampleCardProps} className="col-sm-4" />
-      <FoodCard {...sampleCardProps} className="col-sm-4" />
+      <FoodCard {...sampleCardProps} className="col-sm-4" imageURL={Images[Math.floor(Math.random() * 10)]} />
+      <FoodCard {...sampleCardProps} className="col-sm-4" imageURL={Images[Math.floor(Math.random() * 10)]} />
+      <FoodCard {...sampleCardProps} className="col-sm-4" imageURL={Images[Math.floor(Math.random() * 10)]} />
     </div>
   )
 }

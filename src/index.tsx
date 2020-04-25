@@ -37,7 +37,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <GlobalStyle />
     <React.StrictMode>
-      <div className="container">
+      <div className="container-fluid">
         <Provider store={store}>
           <App />
         </Provider>

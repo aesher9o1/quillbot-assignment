@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-interface PROPTYPES {
+interface PROPTYPES extends React.HTMLAttributes<HTMLElement> {
   varients: number
   color?: string
   theme: any
