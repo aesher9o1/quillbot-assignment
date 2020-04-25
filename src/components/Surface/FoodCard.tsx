@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import RandomImage from '../../utils/randomImage'
 import Paragraph from '../Typography/Paragraph'
 import SmallText from '../Typography/SmallText'
 import ClearButton from '../Button/ClearButton'
-
+import Images from '../../utils/images.json'
 interface PROPTYPES {
   name: string
   food_types: string[]
@@ -37,7 +36,7 @@ const FoodWrapper = styled.div`
 const FoodImage = styled.div`
   height: 160px;
   width: '100%';
-  background: url(${RandomImage()});
+  background: url(${Images[Math.floor(Math.random() * 10)]});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
