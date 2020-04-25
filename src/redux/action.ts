@@ -52,6 +52,36 @@ export const resetRestaurantsView = (): actions.ResetRestaurantsViewAction => {
   }
 }
 
+export const showMorePopularBrands = (): actions.ShowMorePopularBrandsAction => {
+  return {
+    type: actions.SHOW_MORE_POPULAR_BRANDS
+  }
+}
+
+export const showMoreOffers = (): actions.ShowMoreOffersAction => {
+  return {
+    type: actions.SHOW_MORE_OFFERS
+  }
+}
+
+export const showMoreSwiggyExclusive = (): actions.ShowMoreSwiggyExclusiveAction => {
+  return {
+    type: actions.SHOW_MORE_SWIGGY_EXCLUSIVE
+  }
+}
+
+export const showMoreExpressDelivery = (): actions.ShowMoreExpressDeliveryAction => {
+  return {
+    type: actions.SHOW_MORE_EXPRESS_DELIVERY
+  }
+}
+
+export const showMoreGourment = (): actions.ShowMoreGourmentAction => {
+  return {
+    type: actions.SHOW_MORE_GOURMENT
+  }
+}
+
 export const fetchPopularBrands = (): ThunkAction<void, any, null, actions.SetupPopularBrandsAction> => {
   return (dispatch: Dispatch) => {
     axios.get(APIS.GET_POPULAR_BRANDS).then((res) =>

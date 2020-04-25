@@ -7,7 +7,12 @@ import {
   SETUP_EXPRESS_DELIVERY,
   SETUP_GOURMENT,
   SHOW_ALL_RESTAURANT,
-  RESET_RESTAURANT_VIEW
+  RESET_RESTAURANT_VIEW,
+  SHOW_MORE_POPULAR_BRANDS,
+  SHOW_MORE_SWIGGY_EXCLUSIVE,
+  SHOW_MORE_OFFERS,
+  SHOW_MORE_EXPRESS_DELIVERY,
+  SHOW_MORE_GOURMENT
 } from '../types/actions'
 
 const initialRestaurantData = {
@@ -19,10 +24,12 @@ const initialRestaurantData = {
 const initialState: InitialState = {
   popularBrands: initialRestaurantData,
   offersNearYou: initialRestaurantData,
-  swiggyExclusive: initialRestaurantData,
   expressDelivery: initialRestaurantData,
-  gourmet: initialRestaurantData
+  gourmet: initialRestaurantData,
+  swiggyExclusive: initialRestaurantData
 }
+
+const getBounds = (total: number, newNumber: number): number => (newNumber > total ? total : newNumber)
 
 function reducer(state = initialState, action: ActionTypes): InitialState {
   switch (action.type) {
@@ -96,6 +103,57 @@ function reducer(state = initialState, action: ActionTypes): InitialState {
         gourmet: {
           ...state.gourmet,
           renderedOnScreen: 5
+        }
+      }
+    }
+    case SHOW_MORE_POPULAR_BRANDS: {
+      return {
+        ...state,
+        popularBrands: {
+          ...state.popularBrands,
+          renderedOnScreen: getBounds(state.popularBrands.restaurants.length, state.popularBrands.renderedOnScreen + 5)
+        }
+      }
+    }
+    case SHOW_MORE_OFFERS: {
+      return {
+        ...state,
+        offersNearYou: {
+          ...state.offersNearYou,
+          renderedOnScreen: getBounds(state.offersNearYou.restaurants.length, state.offersNearYou.renderedOnScreen + 5)
+        }
+      }
+    }
+    case SHOW_MORE_SWIGGY_EXCLUSIVE: {
+      return {
+        ...state,
+        swiggyExclusive: {
+          ...state.swiggyExclusive,
+          renderedOnScreen: getBounds(
+            state.swiggyExclusive.restaurants.length,
+            state.swiggyExclusive.renderedOnScreen + 5
+          )
+        }
+      }
+    }
+    case SHOW_MORE_EXPRESS_DELIVERY: {
+      return {
+        ...state,
+        expressDelivery: {
+          ...state.expressDelivery,
+          renderedOnScreen: getBounds(
+            state.expressDelivery.restaurants.length,
+            state.expressDelivery.renderedOnScreen + 5
+          )
+        }
+      }
+    }
+    case SHOW_MORE_GOURMENT: {
+      return {
+        ...state,
+        gourmet: {
+          ...state.gourmet,
+          renderedOnScreen: getBounds(state.gourmet.restaurants.length, state.gourmet.renderedOnScreen + 5)
         }
       }
     }

@@ -2,11 +2,18 @@ import React, { useState, useEffect } from 'react'
 import FoodCard from './components/Surface/FoodCard'
 import LoadMoreCard from './components/Surface/LoadMoreCard'
 import Sidebar from './fragments/Sidebar'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from './types/store'
 import Heading from './components/Typography/Heading'
 import Image from './utils/images.json'
 import { displayStates } from './utils/Common'
+import {
+  showMorePopularBrands,
+  showMoreOffers,
+  showMoreSwiggyExclusive,
+  showMoreExpressDelivery,
+  showMoreGourment
+} from './redux/action'
 
 const cardClass = 'col-sm-4 mb-4'
 
@@ -14,6 +21,7 @@ function App() {
   const [cardState, setCardState] = useState(displayStates.DEFAULT)
   const [cards, setCards] = useState([])
   const golbalStoreState = useSelector((state: RootState) => state.storeReducer)
+  const dispatch = useDispatch()
 
   const renderSectionHeader = (sectionName: string) => {
     return cardState === displayStates.DEFAULT ? (
@@ -35,6 +43,26 @@ function App() {
     return cards
   }
 
+  const handleLoadMore = (key: string) => {
+    switch (key) {
+      case 'popularBrands':
+        dispatch(showMorePopularBrands())
+        break
+      case 'offersNearYou':
+        dispatch(showMoreOffers())
+        break
+      case 'swiggyExclusive':
+        dispatch(showMoreSwiggyExclusive())
+        break
+      case 'expressDelivery':
+        dispatch(showMoreExpressDelivery())
+        break
+      case 'gourmet':
+        dispatch(showMoreGourment())
+        break
+    }
+  }
+
   useEffect(() => {
     const cardSection: any = []
 
@@ -47,14 +75,15 @@ function App() {
               <div className="row pl-3"> {renderSectionHeader(value.sectionName)}</div>
               <div className="row">
                 {renderSectionCards(value.restaurants, value.renderedOnScreen)}
-                {restaurantsLeft > 0 ? <LoadMoreCard className={cardClass} items={restaurantsLeft} /> : <div />}
+                {restaurantsLeft > 0 ? (
+                  <LoadMoreCard className={cardClass} items={restaurantsLeft} onClick={() => handleLoadMore(key)} />
+                ) : (
+                  <div />
+                )}
               </div>
             </div>
           )
-        } else {
-          console.log('called')
-          cardSection.push(renderSectionCards(value.restaurants, value.renderedOnScreen))
-        }
+        } else cardSection.push(renderSectionCards(value.restaurants, value.renderedOnScreen))
       }
     })
 

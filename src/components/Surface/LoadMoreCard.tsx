@@ -9,19 +9,29 @@ interface PROPTYPES extends React.HTMLAttributes<HTMLElement> {
 
 const LoadMoreDiv = styled.div`
   width: 100%;
-  border: 2px solid ${(props) => props.theme.accent};
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 20px;
   cursor: pointer;
+  min-height: 300px;
   transition: all 0.25s ease;
+
+  .wrapper {
+    border: 2px solid ${(props) => props.theme.accent};
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
   .heading {
     color: ${(props) => props.theme.accent};
   }
   &:hover {
-    background: ${(props) => props.theme.accent};
     color: ${(props) => props.theme.primary}!important;
-    border: none;
+    .wrapper {
+      border: none;
+      background: ${(props) => props.theme.accent};
+    }
+
     .heading {
       color: ${(props) => props.theme.secondary};
     }
@@ -30,10 +40,12 @@ const LoadMoreDiv = styled.div`
 
 function LoadMoreCard(props: PROPTYPES) {
   return (
-    <LoadMoreDiv className={props.className}>
-      <Heading varients={4} style={{ fontWeight: 500 }} className="heading">
-        +{props.items} More
-      </Heading>
+    <LoadMoreDiv className={props.className} onClick={props.onClick}>
+      <div className="wrapper">
+        <Heading varients={4} style={{ fontWeight: 500 }} className="heading">
+          +{props.items} More
+        </Heading>
+      </div>
     </LoadMoreDiv>
   )
 }

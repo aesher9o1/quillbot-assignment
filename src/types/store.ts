@@ -16,9 +16,9 @@ export interface Restaurants {
 export interface InitialState {
   popularBrands: Restaurants
   offersNearYou: Restaurants
-  swiggyExclusive: Restaurants
   expressDelivery: Restaurants
   gourmet: Restaurants
+  swiggyExclusive: Restaurants
 }
 
 export interface RootState {

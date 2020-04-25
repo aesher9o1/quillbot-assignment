@@ -26,11 +26,11 @@ const theme = {
 
 const store = configureStore()
 batch(() => {
+  store.dispatch(fetchPopularBrands() as any)
+  store.dispatch(fetchOffersNearYou() as any)
+  store.dispatch(fetchExpressDelivery() as any)
   store.dispatch(fetchGourment() as any)
   store.dispatch(fetchSwiggyExclusive() as any)
-  store.dispatch(fetchOffersNearYou() as any)
-  store.dispatch(fetchPopularBrands() as any)
-  store.dispatch(fetchExpressDelivery() as any)
 })
 
 ReactDOM.render(
