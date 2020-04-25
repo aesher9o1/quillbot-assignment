@@ -40,6 +40,18 @@ export const setupGourment = (gourment: Restaurants): actions.SetupGourmentActio
   }
 }
 
+export const showAllRestaurants = (): actions.ShowAllRestaurantsAction => {
+  return {
+    type: actions.SHOW_ALL_RESTAURANT
+  }
+}
+
+export const resetRestaurantsView = (): actions.ResetRestaurantsViewAction => {
+  return {
+    type: actions.RESET_RESTAURANT_VIEW
+  }
+}
+
 export const fetchPopularBrands = (): ThunkAction<void, any, null, actions.SetupPopularBrandsAction> => {
   return (dispatch: Dispatch) => {
     axios.get(APIS.GET_POPULAR_BRANDS).then((res) =>

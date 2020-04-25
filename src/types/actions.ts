@@ -5,6 +5,8 @@ export const SETUP_OFFERS_NEAR_YOU = 'SETUP_OFFERS_NEAR_YOU'
 export const SETUP_SWIGGY_EXCLUSIVE = 'SETUP_SWIGGY_EXCLUSIVE'
 export const SETUP_EXPRESS_DELIVERY = 'SETUP_EXPRESS_DELIVERY'
 export const SETUP_GOURMENT = 'SETUP_GOURMET'
+export const SHOW_ALL_RESTAURANT = 'SHOW_ALL_RESTAURANT'
+export const RESET_RESTAURANT_VIEW = 'RESET_RESTAURANT_VIEW'
 
 export interface SetupPopularBrandsAction {
   type: typeof SETUP_POPULAR_BRANDS
@@ -31,9 +33,19 @@ export interface SetupGourmentAction {
   payload: Restaurants
 }
 
+export interface ShowAllRestaurantsAction {
+  type: typeof SHOW_ALL_RESTAURANT
+}
+
+export interface ResetRestaurantsViewAction {
+  type: typeof RESET_RESTAURANT_VIEW
+}
+
 export type ActionTypes =
   | SetupPopularBrandsAction
   | SetupOffersNearYouAction
   | SetupSwiggyExclusiveAction
   | SetupExpressDeliveryAction
   | SetupGourmentAction
+  | ShowAllRestaurantsAction
+  | ResetRestaurantsViewAction

@@ -1,8 +1,9 @@
 import React from 'react'
 import SidebarButton from '../components/Button/SidebarButton'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../types/store'
 import { displayStates } from '../utils/Common'
+import { showAllRestaurants, resetRestaurantsView } from '../redux/action'
 
 const boxShadow = {
   boxShadow: '0 4px 7px 0 rgba(218, 220, 230, 0.6)',
@@ -15,43 +16,48 @@ interface PROPTYPES {
 }
 
 function Sidebar(props: PROPTYPES) {
-  const golbalStoreState = useSelector((state: RootState) => state.storeReducer)
-
+  const globalStoreState = useSelector((state: RootState) => state.storeReducer)
+  const dispatch = useDispatch()
   const toggleCardStates = () => {
-    console.log('clicked')
-    props.setCardStates(props.cardState === displayStates.DEFAULT ? displayStates.SEEALL : displayStates.DEFAULT)
+    if (props.cardState === displayStates.DEFAULT) {
+      props.setCardStates(displayStates.SEEALL)
+      dispatch(showAllRestaurants())
+    } else if (props.cardState === displayStates.SEEALL) {
+      props.setCardStates(displayStates.DEFAULT)
+      dispatch(resetRestaurantsView())
+    }
   }
 
   return (
     <div style={boxShadow} className="sticky-top">
       <SidebarButton
-        heading={golbalStoreState.popularBrands.sectionName}
-        subheading={`${golbalStoreState.popularBrands.restaurants.length} Restaurants`}
+        heading={globalStoreState.popularBrands.sectionName}
+        subheading={`${globalStoreState.popularBrands.restaurants.length} Restaurants`}
       />
       <SidebarButton
-        heading={golbalStoreState.offersNearYou.sectionName}
-        subheading={`${golbalStoreState.offersNearYou.restaurants.length} Restaurants`}
+        heading={globalStoreState.offersNearYou.sectionName}
+        subheading={`${globalStoreState.offersNearYou.restaurants.length} Restaurants`}
       />
       <SidebarButton
-        heading={golbalStoreState.expressDelivery.sectionName}
-        subheading={`${golbalStoreState.expressDelivery.restaurants.length} Restaurants`}
+        heading={globalStoreState.expressDelivery.sectionName}
+        subheading={`${globalStoreState.expressDelivery.restaurants.length} Restaurants`}
       />
       <SidebarButton
-        heading={golbalStoreState.gourmet.sectionName}
-        subheading={`${golbalStoreState.gourmet.restaurants.length} Restaurants`}
+        heading={globalStoreState.gourmet.sectionName}
+        subheading={`${globalStoreState.gourmet.restaurants.length} Restaurants`}
       />
       <SidebarButton
-        heading={golbalStoreState.swiggyExclusive.sectionName}
-        subheading={`${golbalStoreState.swiggyExclusive.restaurants.length} Restaurants`}
+        heading={globalStoreState.swiggyExclusive.sectionName}
+        subheading={`${globalStoreState.swiggyExclusive.restaurants.length} Restaurants`}
       />
       <SidebarButton
         heading={props.cardState}
         onClick={toggleCardStates}
-        subheading={`${golbalStoreState.popularBrands.restaurants.length +
-          golbalStoreState.offersNearYou.restaurants.length +
-          golbalStoreState.expressDelivery.restaurants.length +
-          golbalStoreState.gourmet.restaurants.length +
-          golbalStoreState.swiggyExclusive.restaurants.length} Restaurants`}
+        subheading={`${globalStoreState.popularBrands.restaurants.length +
+          globalStoreState.offersNearYou.restaurants.length +
+          globalStoreState.expressDelivery.restaurants.length +
+          globalStoreState.gourmet.restaurants.length +
+          globalStoreState.swiggyExclusive.restaurants.length} Restaurants`}
       />
     </div>
   )

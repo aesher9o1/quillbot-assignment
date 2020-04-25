@@ -40,15 +40,21 @@ function App() {
 
     Object.entries(golbalStoreState).forEach(([key, value]) => {
       if (value.sectionName !== 'Loading') {
-        cardSection.push(
-          <div className="container mb-4 border-bottom" key={value.sectionName}>
-            <div className="row pl-3"> {renderSectionHeader(value.sectionName)}</div>
-            <div className="row">
-              {renderSectionCards(value.restaurants, value.renderedOnScreen)}
-              <LoadMoreCard className={cardClass} items={value.restaurants.length - value.renderedOnScreen} />
+        if (cardState === displayStates.DEFAULT) {
+          const restaurantsLeft = value.restaurants.length - value.renderedOnScreen
+          cardSection.push(
+            <div className="container mb-4 border-bottom" key={value.sectionName}>
+              <div className="row pl-3"> {renderSectionHeader(value.sectionName)}</div>
+              <div className="row">
+                {renderSectionCards(value.restaurants, value.renderedOnScreen)}
+                {restaurantsLeft > 0 ? <LoadMoreCard className={cardClass} items={restaurantsLeft} /> : <div />}
+              </div>
             </div>
-          </div>
-        )
+          )
+        } else {
+          console.log('called')
+          cardSection.push(renderSectionCards(value.restaurants, value.renderedOnScreen))
+        }
       }
     })
 
