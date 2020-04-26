@@ -3,6 +3,7 @@ import Sidebar from './fragments/Sidebar'
 import { displayStates } from './utils/Common'
 import BottomBar from './fragments/BottomBar'
 import StoreCards from './fragments/StoreCards'
+import Menu from './fragments/Menu'
 
 function App() {
   const [cardState, setCardState] = useState(displayStates.DEFAULT)
@@ -10,14 +11,11 @@ function App() {
   return (
     <div className="container-fluid">
       <div className="row mt-4">
-        <div className="col-md-2 d-none d-md-block">
-          <Sidebar setCardStates={setCardState} cardState={cardState} />
-        </div>
-        <div className="col-md-10">
+        <Menu cardState={cardState} setCardStates={setCardState} />
+        <div className="col">
           <StoreCards setCardStates={setCardState} cardState={cardState} />
         </div>
       </div>
-      <BottomBar setCardStates={setCardState} cardState={cardState} />
     </div>
   )
 }

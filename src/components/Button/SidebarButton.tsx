@@ -33,7 +33,7 @@ const Wrapper = styled.div<{ isActive?: boolean }>`
 function SidebarButton(props: PROPTYPES) {
   return (
     <Link
-      to={props.to}
+      to={props.to || 'nothing'}
       smooth={true}
       offset={props.offset ? props.offset : -20}
       duration={500}

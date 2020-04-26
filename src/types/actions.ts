@@ -12,6 +12,9 @@ export const SHOW_MORE_OFFERS = 'SHOW_MORE_OFFERS'
 export const SHOW_MORE_SWIGGY_EXCLUSIVE = 'SHOW_MORE_SWIGGY_EXCLUSIVE'
 export const SHOW_MORE_EXPRESS_DELIVERY = 'SHOW_MORE_EXPRESS_DELIVERY'
 export const SHOW_MORE_GOURMENT = 'SHOW_MORE_GOURMENT'
+export const CHANGE_ACTIVE_SECTION = 'CHANGE_ACTIVE_SECTION'
+
+export type SectionNames = 'popularBrands' | 'offersNearYou' | 'expressDelivery' | 'gourmet' | 'swiggyExclusive'
 
 export interface SetupPopularBrandsAction {
   type: typeof SETUP_POPULAR_BRANDS
@@ -66,6 +69,11 @@ export interface ShowMoreGourmentAction {
   type: typeof SHOW_MORE_GOURMENT
 }
 
+export interface ChangeActiveSectionAction {
+  type: typeof CHANGE_ACTIVE_SECTION
+  payload: SectionNames
+}
+
 export type ActionTypes =
   | SetupPopularBrandsAction
   | SetupOffersNearYouAction
@@ -79,3 +87,4 @@ export type ActionTypes =
   | ShowMoreSwiggyExclusiveAction
   | ShowMoreExpressDeliveryAction
   | ShowMoreGourmentAction
+  | ChangeActiveSectionAction

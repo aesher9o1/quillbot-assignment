@@ -82,6 +82,13 @@ export const showMoreGourment = (): actions.ShowMoreGourmentAction => {
   }
 }
 
+export const changeActiveSection = (sectionName: actions.SectionNames): actions.ChangeActiveSectionAction => {
+  return {
+    type: actions.CHANGE_ACTIVE_SECTION,
+    payload: sectionName
+  }
+}
+
 export const fetchPopularBrands = (): ThunkAction<void, any, null, actions.SetupPopularBrandsAction> => {
   return (dispatch: Dispatch) => {
     axios.get(APIS.GET_POPULAR_BRANDS).then((res) =>
@@ -89,7 +96,8 @@ export const fetchPopularBrands = (): ThunkAction<void, any, null, actions.Setup
         setupPopularBrands({
           sectionName: 'Popular Brands',
           renderedOnScreen: 5,
-          restaurants: res.data
+          restaurants: res.data,
+          isActive: true
         })
       )
     )
@@ -103,7 +111,8 @@ export const fetchOffersNearYou = (): ThunkAction<void, any, null, actions.Setup
         setupOffersNearYou({
           sectionName: 'Offers Near You',
           renderedOnScreen: 5,
-          restaurants: res.data
+          restaurants: res.data,
+          isActive: false
         })
       )
     )
@@ -117,7 +126,8 @@ export const fetchSwiggyExclusive = (): ThunkAction<void, any, null, actions.Set
         setupSwiggyExclusive({
           sectionName: 'Only On Swiggy',
           renderedOnScreen: 5,
-          restaurants: res.data
+          restaurants: res.data,
+          isActive: false
         })
       )
     )
@@ -131,7 +141,8 @@ export const fetchExpressDelivery = (): ThunkAction<void, any, null, actions.Set
         setupExpressDelivery({
           sectionName: 'Express Delivery',
           renderedOnScreen: 5,
-          restaurants: res.data
+          restaurants: res.data,
+          isActive: false
         })
       )
     )
@@ -145,7 +156,8 @@ export const fetchGourment = (): ThunkAction<void, any, null, actions.SetupGourm
         setupGourment({
           sectionName: 'Gourmet',
           renderedOnScreen: 5,
-          restaurants: res.data
+          restaurants: res.data,
+          isActive: false
         })
       )
     )
