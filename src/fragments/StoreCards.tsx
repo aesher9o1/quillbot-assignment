@@ -1,32 +1,33 @@
 import React, { useState, useEffect } from 'react'
-import FoodCard from './components/Surface/FoodCard'
-import LoadMoreCard from './components/Surface/LoadMoreCard'
-import Sidebar from './fragments/Sidebar'
+import LoadMoreCard from '../components/Surface/LoadMoreCard'
+import FoodCard from '../components/Surface/FoodCard'
+import Heading from '../components/Typography/Heading'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from './types/store'
-import Heading from './components/Typography/Heading'
-import Image from './utils/images.json'
-import { displayStates } from './utils/Common'
+import { displayStates } from '../utils/Common'
+import { RootState } from '../types/store'
 import {
   showMorePopularBrands,
   showMoreOffers,
   showMoreSwiggyExclusive,
-  showMoreExpressDelivery,
-  showMoreGourment
-} from './redux/action'
-import BottomBar from './fragments/BottomBar'
-import StoreCards from './fragments/StoreCards'
+  showMoreGourment,
+  showMoreExpressDelivery
+} from '../redux/action'
+import Image from '../utils/images.json'
+
+interface PROPTYPES {
+  setCardStates: Function
+  cardState: string
+}
 
 const cardClass = 'col-sm-4 mb-4'
 
-function App() {
-  const [cardState, setCardState] = useState(displayStates.DEFAULT)
-  const [cards, setCards] = useState([])
+function StoreCards(props: PROPTYPES) {
+  const [restaurantCard, setRestaurantCards] = useState([])
   const golbalStoreState = useSelector((state: RootState) => state.storeReducer)
   const dispatch = useDispatch()
 
   const renderSectionHeader = (sectionName: string) => {
-    return cardState === displayStates.DEFAULT ? (
+    return props.cardState === displayStates.DEFAULT ? (
       <div className="row mb-2 ml-3">
         <Heading varients={5}>{sectionName}</Heading>
       </div>
@@ -70,7 +71,7 @@ function App() {
 
     Object.entries(golbalStoreState).forEach(([key, value]) => {
       if (value.sectionName !== 'Loading') {
-        if (cardState === displayStates.DEFAULT) {
+        if (props.cardState === displayStates.DEFAULT) {
           const restaurantsLeft = value.restaurants.length - value.renderedOnScreen
           cardSection.push(
             <div className="container mb-4 border-bottom" key={value.sectionName}>
@@ -90,22 +91,10 @@ function App() {
         } else cardSection.push(renderSectionCards(value.restaurants, value.renderedOnScreen))
       }
     })
+    setRestaurantCards(cardSection)
+  }, [golbalStoreState, props.cardState])
 
-    setCards(cardSection)
-  }, [golbalStoreState, cardState])
-
-  return (
-    <div className="container-fluid">
-      <div className="row mt-4">
-        <div className="col-md-2 d-none d-md-block">
-          <Sidebar setCardStates={setCardState} cardState={cardState} />
-        </div>
-        <div className="col-md-10">
-          <StoreCards setCardStates={setCardState} cardState={cardState} />
-        </div>
-      </div>
-      <BottomBar setCardStates={setCardState} cardState={cardState} />
-    </div>
-  )
+  return <div className="row">{restaurantCard}</div>
 }
-export default App
+
+export default StoreCards

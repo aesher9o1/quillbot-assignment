@@ -13,8 +13,6 @@ interface PROPTYPES extends React.HTMLAttributes<HTMLElement> {
   imageURL: string
 }
 
-console.log(Math.floor(Math.random() * 10))
-
 const FoodWrapper = styled.div`
   flex-direction: column;
   border: 1px solid #fff;
