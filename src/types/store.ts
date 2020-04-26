@@ -11,7 +11,6 @@ export interface Restaurants {
   sectionName: string
   renderedOnScreen: number
   restaurants: Restaurants[]
-  isActive: boolean
 }
 
 export interface InitialState {

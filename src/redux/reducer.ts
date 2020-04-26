@@ -12,15 +12,13 @@ import {
   SHOW_MORE_SWIGGY_EXCLUSIVE,
   SHOW_MORE_OFFERS,
   SHOW_MORE_EXPRESS_DELIVERY,
-  SHOW_MORE_GOURMENT,
-  CHANGE_ACTIVE_SECTION
+  SHOW_MORE_GOURMENT
 } from '../types/actions'
 
 const initialRestaurantData = {
   sectionName: 'Loading',
   renderedOnScreen: 0,
-  restaurants: [],
-  isActive: false
+  restaurants: []
 }
 
 const initialState: InitialState = {
@@ -64,28 +62,24 @@ function reducer(state = initialState, action: ActionTypes): InitialState {
       return {
         popularBrands: {
           ...state.popularBrands,
-          isActive: false,
           renderedOnScreen: state.popularBrands.restaurants.length
         },
         offersNearYou: {
           ...state.offersNearYou,
-          isActive: false,
           renderedOnScreen: state.offersNearYou.restaurants.length
-        },
-        swiggyExclusive: {
-          ...state.swiggyExclusive,
-          isActive: false,
-          renderedOnScreen: state.swiggyExclusive.restaurants.length
         },
         expressDelivery: {
           ...state.expressDelivery,
-          isActive: false,
           renderedOnScreen: state.expressDelivery.restaurants.length
         },
         gourmet: {
           ...state.gourmet,
-          isActive: false,
+
           renderedOnScreen: state.gourmet.restaurants.length
+        },
+        swiggyExclusive: {
+          ...state.swiggyExclusive,
+          renderedOnScreen: state.swiggyExclusive.restaurants.length
         }
       }
     }
@@ -94,28 +88,23 @@ function reducer(state = initialState, action: ActionTypes): InitialState {
         ...state,
         popularBrands: {
           ...state.popularBrands,
-          renderedOnScreen: 5,
-          isActive: true
+          renderedOnScreen: 5
         },
         offersNearYou: {
           ...state.offersNearYou,
-          renderedOnScreen: 5,
-          isActive: false
+          renderedOnScreen: 5
         },
         swiggyExclusive: {
           ...state.swiggyExclusive,
-          renderedOnScreen: 5,
-          isActive: false
+          renderedOnScreen: 5
         },
         expressDelivery: {
           ...state.expressDelivery,
-          renderedOnScreen: 5,
-          isActive: false
+          renderedOnScreen: 5
         },
         gourmet: {
           ...state.gourmet,
-          renderedOnScreen: 5,
-          isActive: false
+          renderedOnScreen: 5
         }
       }
     }
@@ -169,34 +158,6 @@ function reducer(state = initialState, action: ActionTypes): InitialState {
           renderedOnScreen: getBounds(state.gourmet.restaurants.length, state.gourmet.renderedOnScreen + 5)
         }
       }
-    }
-
-    case CHANGE_ACTIVE_SECTION: {
-      const newState = {
-        ...state,
-        popularBrands: {
-          ...state.popularBrands,
-          isActive: false
-        },
-        offersNearYou: {
-          ...state.offersNearYou,
-          isActive: false
-        },
-        swiggyExclusive: {
-          ...state.swiggyExclusive,
-          isActive: false
-        },
-        expressDelivery: {
-          ...state.expressDelivery,
-          isActive: false
-        },
-        gourmet: {
-          ...state.gourmet,
-          isActive: false
-        }
-      }
-      newState[action.payload].isActive = true
-      return newState
     }
 
     default:

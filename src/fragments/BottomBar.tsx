@@ -1,6 +1,5 @@
 import React from 'react'
 import BottomBarIcon from '../components/Button/BottomBarIcon'
-import { displayStates } from '../utils/Common'
 
 const boxShadow = {
   boxShadow: '0 4px 7px 0 rgba(218, 220, 230, 0.6)',
@@ -9,8 +8,6 @@ const boxShadow = {
 }
 
 interface PROPTYPES {
-  setCardStates: Function
-  cardState: string
   sectionActiveState: {
     popularBrands: boolean
     offersNearYou: boolean
@@ -19,7 +16,6 @@ interface PROPTYPES {
     swiggyExclusive: boolean
     seeAll: boolean
   }
-  setSectionActiveState: Function
   toggleCardStates: any
   handleSetActive: Function
 }
@@ -70,9 +66,9 @@ function BottomBar(props: PROPTYPES) {
         />
 
         <BottomBarIcon
-          text={'Show All'}
+          text={props.sectionActiveState.seeAll ? 'LESS' : 'ALL'}
           iconClass={'fa fa-star'}
-          isActive={props.cardState === displayStates.SEEALL}
+          isActive={props.sectionActiveState.seeAll}
           onClick={props.toggleCardStates}
         />
       </div>

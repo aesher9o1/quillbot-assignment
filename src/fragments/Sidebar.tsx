@@ -2,15 +2,12 @@ import React from 'react'
 import SidebarButton from '../components/Button/SidebarButton'
 import { useSelector } from 'react-redux'
 import { RootState } from '../types/store'
-import { displayStates } from '../utils/Common'
 
 const boxShadow = {
   boxShadow: '0 4px 7px 0 rgba(218, 220, 230, 0.6)',
   padding: 0
 }
 interface PROPTYPES {
-  setCardStates: Function
-  cardState: string
   sectionActiveState: {
     popularBrands: boolean
     offersNearYou: boolean
@@ -19,7 +16,6 @@ interface PROPTYPES {
     swiggyExclusive: boolean
     seeAll: boolean
   }
-  setSectionActiveState: Function
   toggleCardStates: any
   handleSetActive: Function
 }
@@ -71,14 +67,14 @@ function Sidebar(props: PROPTYPES) {
       />
 
       <SidebarButton
-        heading={props.cardState}
+        heading={props.sectionActiveState.seeAll ? 'SEE LESS' : 'SEE MORE'}
         onClick={props.toggleCardStates}
         subheading={`${globalStoreState.popularBrands.restaurants.length +
           globalStoreState.offersNearYou.restaurants.length +
           globalStoreState.expressDelivery.restaurants.length +
           globalStoreState.gourmet.restaurants.length +
           globalStoreState.swiggyExclusive.restaurants.length} Restaurants`}
-        isActive={props.cardState === displayStates.SEEALL}
+        isActive={props.sectionActiveState.seeAll}
       />
     </div>
   )

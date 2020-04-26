@@ -11,7 +11,7 @@ const LoadMoreDiv = styled.div`
   width: 100%;
   padding: 20px;
   cursor: pointer;
-  min-height: 300px;
+  min-height: 330px;
   transition: all 0.25s ease;
 
   .wrapper {

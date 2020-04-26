@@ -3,7 +3,7 @@ import LoadMoreCard from '../components/Surface/LoadMoreCard'
 import FoodCard from '../components/Surface/FoodCard'
 import Heading from '../components/Typography/Heading'
 import { useSelector, useDispatch } from 'react-redux'
-import { displayStates } from '../utils/Common'
+import { isShowAll } from '../utils/Common'
 import { RootState } from '../types/store'
 import {
   showMorePopularBrands,
@@ -14,64 +14,64 @@ import {
 } from '../redux/action'
 import Image from '../utils/images.json'
 
-interface PROPTYPES {
-  setCardStates: Function
-  cardState: string
-}
-
 const cardClass = 'col-sm-4 mb-4'
 
-function StoreCards(props: PROPTYPES) {
+function StoreCards() {
   const [restaurantCard, setRestaurantCards] = useState([])
   const golbalStoreState = useSelector((state: RootState) => state.storeReducer)
   const dispatch = useDispatch()
 
-  const renderSectionHeader = (sectionName: string) => {
-    return props.cardState === displayStates.DEFAULT ? (
-      <div className="row mb-2 ml-3">
-        <Heading varients={5}>{sectionName}</Heading>
-      </div>
-    ) : (
-      <div />
-    )
-  }
-
-  const renderSectionCards = (restaurants: any, renderedOnScreen: number) => {
-    const cards = []
-    for (let i = 0; i < renderedOnScreen; i++)
-      cards.push(
-        <FoodCard {...restaurants[i]} className={cardClass} key={i} imageURL={Image[Math.floor(Math.random() * 10)]} />
-      )
-
-    return cards
-  }
-
-  const handleLoadMore = (key: string) => {
-    switch (key) {
-      case 'popularBrands':
-        dispatch(showMorePopularBrands())
-        break
-      case 'offersNearYou':
-        dispatch(showMoreOffers())
-        break
-      case 'swiggyExclusive':
-        dispatch(showMoreSwiggyExclusive())
-        break
-      case 'expressDelivery':
-        dispatch(showMoreExpressDelivery())
-        break
-      case 'gourmet':
-        dispatch(showMoreGourment())
-        break
-    }
-  }
-
   useEffect(() => {
+    const isShowAllActive = isShowAll(golbalStoreState)
     const cardSection: any = []
+    const renderSectionHeader = (sectionName: string) => {
+      return !isShowAllActive ? (
+        <div className="row mb-2 ml-3">
+          <Heading varients={5}>{sectionName}</Heading>
+        </div>
+      ) : (
+        <div />
+      )
+    }
+
+    const renderSectionCards = (restaurants: any, renderedOnScreen: number) => {
+      const cards = []
+      for (let i = 0; i < renderedOnScreen; i++)
+        cards.push(
+          <FoodCard
+            {...restaurants[i]}
+            className={cardClass}
+            key={i}
+            imageURL={Image[Math.floor(Math.random() * 10)]}
+          />
+        )
+
+      return cards
+    }
+
+    const handleLoadMore = (key: string) => {
+      switch (key) {
+        case 'popularBrands':
+          dispatch(showMorePopularBrands())
+          break
+        case 'offersNearYou':
+          dispatch(showMoreOffers())
+          break
+        case 'swiggyExclusive':
+          dispatch(showMoreSwiggyExclusive())
+          break
+        case 'expressDelivery':
+          dispatch(showMoreExpressDelivery())
+          break
+        case 'gourmet':
+          dispatch(showMoreGourment())
+          break
+      }
+    }
 
     Object.entries(golbalStoreState).forEach(([key, value]) => {
       if (value.sectionName !== 'Loading') {
-        if (props.cardState === displayStates.DEFAULT) {
+        if (!isShowAllActive) {
           const restaurantsLeft = value.restaurants.length - value.renderedOnScreen
           cardSection.push(
             <div className="container mb-4 border-bottom" key={value.sectionName}>
@@ -92,7 +92,7 @@ function StoreCards(props: PROPTYPES) {
       }
     })
     setRestaurantCards(cardSection)
-  }, [golbalStoreState, props.cardState])
+  }, [golbalStoreState, dispatch])
 
   return <div className="row">{restaurantCard}</div>
 }
