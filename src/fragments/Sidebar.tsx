@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../types/store'
 import { displayStates } from '../utils/Common'
 import { showAllRestaurants, resetRestaurantsView } from '../redux/action'
-import { Link, animateScroll } from 'react-scroll'
+import { animateScroll } from 'react-scroll'
 
 const boxShadow = {
   boxShadow: '0 4px 7px 0 rgba(218, 220, 230, 0.6)',
@@ -35,14 +35,7 @@ function Sidebar(props: PROPTYPES) {
       animateScroll.scrollToTop()
       props.setCardStates(displayStates.SEEALL)
       dispatch(showAllRestaurants())
-      setSectionActiveState({
-        popularBrands: false,
-        offersNearYou: false,
-        expressDelivery: false,
-        gourmet: false,
-        swiggyExclusive: false,
-        seeAll: true
-      })
+      handleSetActive('seeAll')
     } else if (props.cardState === displayStates.SEEALL) {
       animateScroll.scrollToTop()
       props.setCardStates(displayStates.DEFAULT)
@@ -74,76 +67,47 @@ function Sidebar(props: PROPTYPES) {
 
   return (
     <div style={boxShadow} className="sticky-top">
-      <Link
-        to="popularBrands"
-        smooth={true}
+      <SidebarButton
+        heading={globalStoreState.popularBrands.sectionName}
+        subheading={`${globalStoreState.popularBrands.restaurants.length} Restaurants`}
+        isActive={sectionActiveState.popularBrands}
         offset={-25}
-        duration={500}
-        spy={true}
+        to="popularBrands"
         onSetActive={() => handleSetActive('popularBrands')}
-      >
-        <SidebarButton
-          heading={globalStoreState.popularBrands.sectionName}
-          subheading={`${globalStoreState.popularBrands.restaurants.length} Restaurants`}
-          isActive={sectionActiveState.popularBrands}
-        />
-      </Link>
-      <Link
+      />
+
+      <SidebarButton
+        heading={globalStoreState.offersNearYou.sectionName}
+        subheading={`${globalStoreState.offersNearYou.restaurants.length} Restaurants`}
+        isActive={sectionActiveState.offersNearYou}
         to="offersNearYou"
-        smooth={true}
-        offset={-20}
-        duration={500}
-        spy={true}
         onSetActive={() => handleSetActive('offersNearYou')}
-      >
-        <SidebarButton
-          heading={globalStoreState.offersNearYou.sectionName}
-          subheading={`${globalStoreState.offersNearYou.restaurants.length} Restaurants`}
-          isActive={sectionActiveState.offersNearYou}
-        />
-      </Link>
-      <Link
+      />
+
+      <SidebarButton
+        heading={globalStoreState.expressDelivery.sectionName}
+        subheading={`${globalStoreState.expressDelivery.restaurants.length} Restaurants`}
+        isActive={sectionActiveState.expressDelivery}
         to="expressDelivery"
-        smooth={true}
-        offset={-20}
-        spy={true}
-        duration={500}
         onSetActive={() => handleSetActive('expressDelivery')}
-      >
-        <SidebarButton
-          heading={globalStoreState.expressDelivery.sectionName}
-          subheading={`${globalStoreState.expressDelivery.restaurants.length} Restaurants`}
-          isActive={sectionActiveState.expressDelivery}
-        />
-      </Link>
-      <Link
+      />
+
+      <SidebarButton
+        heading={globalStoreState.gourmet.sectionName}
+        subheading={`${globalStoreState.gourmet.restaurants.length} Restaurants`}
+        isActive={sectionActiveState.gourmet}
         to="gourmet"
-        smooth={true}
-        offset={-20}
-        duration={500}
-        spy={true}
         onSetActive={() => handleSetActive('gourmet')}
-      >
-        <SidebarButton
-          heading={globalStoreState.gourmet.sectionName}
-          subheading={`${globalStoreState.gourmet.restaurants.length} Restaurants`}
-          isActive={sectionActiveState.gourmet}
-        />
-      </Link>
-      <Link
+      />
+
+      <SidebarButton
+        heading={globalStoreState.swiggyExclusive.sectionName}
+        subheading={`${globalStoreState.swiggyExclusive.restaurants.length} Restaurants`}
+        isActive={sectionActiveState.swiggyExclusive}
         to="swiggyExclusive"
-        smooth={true}
-        offset={-20}
-        duration={500}
-        spy={true}
         onSetActive={() => handleSetActive('swiggyExclusive')}
-      >
-        <SidebarButton
-          heading={globalStoreState.swiggyExclusive.sectionName}
-          subheading={`${globalStoreState.swiggyExclusive.restaurants.length} Restaurants`}
-          isActive={sectionActiveState.swiggyExclusive}
-        />
-      </Link>
+      />
+
       <SidebarButton
         heading={props.cardState}
         onClick={toggleCardStates}

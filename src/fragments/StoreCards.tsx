@@ -32,7 +32,7 @@ function StoreCards(props: PROPTYPES) {
         <Heading varients={5}>{sectionName}</Heading>
       </div>
     ) : (
-      <div></div>
+      <div />
     )
   }
 
