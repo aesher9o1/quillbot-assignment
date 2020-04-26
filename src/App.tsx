@@ -72,7 +72,9 @@ function App() {
           const restaurantsLeft = value.restaurants.length - value.renderedOnScreen
           cardSection.push(
             <div className="container mb-4 border-bottom" key={value.sectionName}>
-              <div className="row pl-3"> {renderSectionHeader(value.sectionName)}</div>
+              <div className="row pl-3" id={key}>
+                {renderSectionHeader(value.sectionName)}
+              </div>
               <div className="row">
                 {renderSectionCards(value.restaurants, value.renderedOnScreen)}
                 {restaurantsLeft > 0 ? (
@@ -91,13 +93,20 @@ function App() {
   }, [golbalStoreState, cardState])
 
   return (
-    <div className="row mt-4">
-      <div className="col-2">
-        <Sidebar setCardStates={setCardState} cardState={cardState} />
+    <div className="container-fluid">
+      <div className="row mt-4">
+        <div className="col-md-2 d-none d-md-block">
+          <Sidebar setCardStates={setCardState} cardState={cardState} />
+        </div>
+        <div className="col-md-10">
+          <div className="row">{cards}</div>
+        </div>
       </div>
-      <div className="col-10">
-        <div className="row pr-5">{cards}</div>
-      </div>
+      <nav className="navbar fixed-bottom navbar-light bg-light">
+        <a className="navbar-brand" href="#">
+          Fixed bottom
+        </a>
+      </nav>
     </div>
   )
 }

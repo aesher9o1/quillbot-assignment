@@ -14,7 +14,6 @@ const Wrapper = styled.div<{ isActive?: boolean }>`
   background-color: ${(props) => (props.isActive ? props.theme.accent : 'white')};
   width: 100%;
   padding: 15px;
-  transition: all 0.5s ease;
   cursor: pointer;
   .heading {
     color: ${(props) => (props.isActive ? 'white' : props.theme.primary)};

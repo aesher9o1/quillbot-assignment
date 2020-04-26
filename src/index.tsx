@@ -37,11 +37,9 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <GlobalStyle />
     <React.StrictMode>
-      <div className="container-fluid">
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </div>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>
   </ThemeProvider>,
   document.getElementById('root')
