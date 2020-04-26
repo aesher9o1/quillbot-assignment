@@ -52,35 +52,16 @@ export const resetRestaurantsView = (): actions.ResetRestaurantsViewAction => {
   }
 }
 
-export const showMorePopularBrands = (): actions.ShowMorePopularBrandsAction => {
+export const showMoreRestaurant = (category: actions.SectionNames): actions.ShowMoreRestaurantAction => {
   return {
-    type: actions.SHOW_MORE_POPULAR_BRANDS
+    type: actions.SHOW_MORE_RESTAURANT,
+    payload: category
   }
 }
 
-export const showMoreOffers = (): actions.ShowMoreOffersAction => {
-  return {
-    type: actions.SHOW_MORE_OFFERS
-  }
-}
-
-export const showMoreSwiggyExclusive = (): actions.ShowMoreSwiggyExclusiveAction => {
-  return {
-    type: actions.SHOW_MORE_SWIGGY_EXCLUSIVE
-  }
-}
-
-export const showMoreExpressDelivery = (): actions.ShowMoreExpressDeliveryAction => {
-  return {
-    type: actions.SHOW_MORE_EXPRESS_DELIVERY
-  }
-}
-
-export const showMoreGourment = (): actions.ShowMoreGourmentAction => {
-  return {
-    type: actions.SHOW_MORE_GOURMENT
-  }
-}
+/**
+ * THUNKS
+ */
 
 export const fetchPopularBrands = (): ThunkAction<void, any, null, actions.SetupPopularBrandsAction> => {
   return (dispatch: Dispatch) => {

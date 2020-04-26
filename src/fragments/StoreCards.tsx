@@ -2,17 +2,12 @@ import React, { useState, useEffect } from 'react'
 import LoadMoreCard from '../components/Surface/LoadMoreCard'
 import FoodCard from '../components/Surface/FoodCard'
 import Heading from '../components/Typography/Heading'
+import Image from '../utils/images.json'
 import { useSelector, useDispatch } from 'react-redux'
 import { isShowAll } from '../utils/Common'
 import { RootState } from '../types/store'
-import {
-  showMorePopularBrands,
-  showMoreOffers,
-  showMoreSwiggyExclusive,
-  showMoreGourment,
-  showMoreExpressDelivery
-} from '../redux/action'
-import Image from '../utils/images.json'
+import { showMoreRestaurant } from '../redux/action'
+import { SectionNames } from '../types/actions'
 
 const cardClass = 'col-sm-4 mb-4'
 
@@ -49,26 +44,6 @@ function StoreCards() {
       return cards
     }
 
-    const handleLoadMore = (key: string) => {
-      switch (key) {
-        case 'popularBrands':
-          dispatch(showMorePopularBrands())
-          break
-        case 'offersNearYou':
-          dispatch(showMoreOffers())
-          break
-        case 'swiggyExclusive':
-          dispatch(showMoreSwiggyExclusive())
-          break
-        case 'expressDelivery':
-          dispatch(showMoreExpressDelivery())
-          break
-        case 'gourmet':
-          dispatch(showMoreGourment())
-          break
-      }
-    }
-
     Object.entries(golbalStoreState).forEach(([key, value]) => {
       if (value.sectionName !== 'Loading') {
         if (!isShowAllActive) {
@@ -81,7 +56,11 @@ function StoreCards() {
               <div className="row">
                 {renderSectionCards(value.restaurants, value.renderedOnScreen)}
                 {restaurantsLeft > 0 ? (
-                  <LoadMoreCard className={cardClass} items={restaurantsLeft} onClick={() => handleLoadMore(key)} />
+                  <LoadMoreCard
+                    className={cardClass}
+                    items={restaurantsLeft}
+                    onClick={() => dispatch(showMoreRestaurant(key as SectionNames))}
+                  />
                 ) : (
                   <div />
                 )}

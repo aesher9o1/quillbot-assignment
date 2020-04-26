@@ -8,11 +8,7 @@ import {
   SETUP_GOURMENT,
   SHOW_ALL_RESTAURANT,
   RESET_RESTAURANT_VIEW,
-  SHOW_MORE_POPULAR_BRANDS,
-  SHOW_MORE_SWIGGY_EXCLUSIVE,
-  SHOW_MORE_OFFERS,
-  SHOW_MORE_EXPRESS_DELIVERY,
-  SHOW_MORE_GOURMENT
+  SHOW_MORE_RESTAURANT
 } from '../types/actions'
 
 const initialRestaurantData = {
@@ -108,56 +104,13 @@ function reducer(state = initialState, action: ActionTypes): InitialState {
         }
       }
     }
-    case SHOW_MORE_POPULAR_BRANDS: {
-      return {
-        ...state,
-        popularBrands: {
-          ...state.popularBrands,
-          renderedOnScreen: getBounds(state.popularBrands.restaurants.length, state.popularBrands.renderedOnScreen + 5)
-        }
-      }
-    }
-    case SHOW_MORE_OFFERS: {
-      return {
-        ...state,
-        offersNearYou: {
-          ...state.offersNearYou,
-          renderedOnScreen: getBounds(state.offersNearYou.restaurants.length, state.offersNearYou.renderedOnScreen + 5)
-        }
-      }
-    }
-    case SHOW_MORE_SWIGGY_EXCLUSIVE: {
-      return {
-        ...state,
-        swiggyExclusive: {
-          ...state.swiggyExclusive,
-          renderedOnScreen: getBounds(
-            state.swiggyExclusive.restaurants.length,
-            state.swiggyExclusive.renderedOnScreen + 5
-          )
-        }
-      }
-    }
-    case SHOW_MORE_EXPRESS_DELIVERY: {
-      return {
-        ...state,
-        expressDelivery: {
-          ...state.expressDelivery,
-          renderedOnScreen: getBounds(
-            state.expressDelivery.restaurants.length,
-            state.expressDelivery.renderedOnScreen + 5
-          )
-        }
-      }
-    }
-    case SHOW_MORE_GOURMENT: {
-      return {
-        ...state,
-        gourmet: {
-          ...state.gourmet,
-          renderedOnScreen: getBounds(state.gourmet.restaurants.length, state.gourmet.renderedOnScreen + 5)
-        }
-      }
+    case SHOW_MORE_RESTAURANT: {
+      const newState = { ...state }
+      newState[action.payload].renderedOnScreen = getBounds(
+        state[action.payload].restaurants.length,
+        state[action.payload].renderedOnScreen + 5
+      )
+      return newState
     }
 
     default:

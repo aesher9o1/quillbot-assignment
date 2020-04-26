@@ -7,11 +7,7 @@ export const SETUP_EXPRESS_DELIVERY = 'SETUP_EXPRESS_DELIVERY'
 export const SETUP_GOURMENT = 'SETUP_GOURMET'
 export const SHOW_ALL_RESTAURANT = 'SHOW_ALL_RESTAURANT'
 export const RESET_RESTAURANT_VIEW = 'RESET_RESTAURANT_VIEW'
-export const SHOW_MORE_POPULAR_BRANDS = 'SHOW_MORE_POPULAR_BRANDS'
-export const SHOW_MORE_OFFERS = 'SHOW_MORE_OFFERS'
-export const SHOW_MORE_SWIGGY_EXCLUSIVE = 'SHOW_MORE_SWIGGY_EXCLUSIVE'
-export const SHOW_MORE_EXPRESS_DELIVERY = 'SHOW_MORE_EXPRESS_DELIVERY'
-export const SHOW_MORE_GOURMENT = 'SHOW_MORE_GOURMENT'
+export const SHOW_MORE_RESTAURANT = 'SHOW_MORE_RESTAURANT'
 
 export type SectionNames = 'popularBrands' | 'offersNearYou' | 'expressDelivery' | 'gourmet' | 'swiggyExclusive'
 
@@ -47,25 +43,9 @@ export interface ShowAllRestaurantsAction {
 export interface ResetRestaurantsViewAction {
   type: typeof RESET_RESTAURANT_VIEW
 }
-
-export interface ShowMorePopularBrandsAction {
-  type: typeof SHOW_MORE_POPULAR_BRANDS
-}
-
-export interface ShowMoreOffersAction {
-  type: typeof SHOW_MORE_OFFERS
-}
-
-export interface ShowMoreSwiggyExclusiveAction {
-  type: typeof SHOW_MORE_SWIGGY_EXCLUSIVE
-}
-
-export interface ShowMoreExpressDeliveryAction {
-  type: typeof SHOW_MORE_EXPRESS_DELIVERY
-}
-
-export interface ShowMoreGourmentAction {
-  type: typeof SHOW_MORE_GOURMENT
+export interface ShowMoreRestaurantAction {
+  type: typeof SHOW_MORE_RESTAURANT
+  payload: SectionNames
 }
 
 export type ActionTypes =
@@ -76,8 +56,4 @@ export type ActionTypes =
   | SetupGourmentAction
   | ShowAllRestaurantsAction
   | ResetRestaurantsViewAction
-  | ShowMorePopularBrandsAction
-  | ShowMoreOffersAction
-  | ShowMoreSwiggyExclusiveAction
-  | ShowMoreExpressDeliveryAction
-  | ShowMoreGourmentAction
+  | ShowMoreRestaurantAction
